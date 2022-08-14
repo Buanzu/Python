@@ -1,97 +1,78 @@
-# from random import choice
-#
-#
-# class Car:
-#     """Main car"""
-#     direction = ["noth", "notheast", "east", "southeast",
-#                  "south", "southwest", "west", "nothwest"]
-#
-#     def __init__(self, name, color, speed, police=False):
-#         self.name = name
-#         self.color = color
-#         self.speed = speed
-#         self.is_police = police
-#         print(f"New car: {name} has a color: {color}. \n Is the car a police car? {police}")
-#
-#     def go(self):
-#         print(f'{self.name}: Car went.')
-#
-#     def stop(self):
-#         print(f'{self.name}: Car stopped!')
-#
-#     def turn(self):
-#         print(f'{self.name}: Car turned{choice(self.direction)}')
-#
-#     def show_speed(self):
-#         return f'{self.name}: Car speed: {self.speed}.'
-#
-#
-# class TownCar(Car):
-#     """City car"""
-#
-#     def show_speed(self):
-#         return f'{self.name}: Car speed: {self.speed}. Speeding!' if self.speed > 60 else super().show_speed()
-#
-#
-# class WorkCar(Car):
-#     """Cargo Track"""
-#
-#     def show_speed(self):
-#         return f'{self.name}: Car speed: {self.speed}. Speeding!' if self.speed > 40 else super().show_speed()
-#
-#
-# class SportCar(Car):
-#     pass
-#
-#
-# class PoliceCar(Car):
-#     def __init__(self, name, color, speed):
-#         super().__init__(name, color, speed, police=True)
-#
-#
-# police_car = PoliceCar('"Копы"', "синявка", 100)
-# work_car = WorkCar('"Газель"', "черный", 40)
-# sport_car = SportCar('"Мажорка"', "неон", 120)
-# town_car = TownCar("Кэб", "красный", 65)
-#
-# List_of_cars = [police_car, work_car, sport_car, town_car]
-#
-# for n in List_of_cars:
-#     n.go()
-#     print(n.show_speed())
-#     n.turn()
-#     n.stop()
-#     print()
 
-# class Stationery:
-#     def __init__(self, title="Something information"):
-#         self.title = title
-#
-#     def draw(self):
-#         print(f'Start drawing! {self.title}')
+
+# from abc import ABC, abstractmethod
 #
 #
-# class Pen(Stationery):
-#     def draw(self):
-#         print(f'Start drawing with {self.title} pen!')
+# class Clothes(ABC):
+#     calculation = 0
+#
+#     def __init__(self, param):
+#         self.param = param
+#
+#     @property
+#     @abstractmethod
+#     def consumtion(self):
+#         pass
+#
+#     def __add__(self, other):
+#         Clothes.calculation += self.consumtion + other.consumtion
+#         return Costume(0)
+#
+#     def __str__(self):
+#         res = Clothes.calculation
+#         Clothes.calculation = 0
+#         return f"{res}"
 #
 #
-# class Pensil(Stationery):
-#     def draw(self):
-#         print(f'Start drawing with {self.title} pensil!')
+# class Coat(Clothes):
+#     @property
+#     def consumtion(self):
+#         return round(self.param / 6.5) + 0.5
 #
 #
-# class Marker(Stationery):
-#     def draw(self):
-#         print(f'Start drawing with {self.title} marker!')
+# class Costume(Clothes):
+#     @property
+#     def consumtion(self):
+#         return round((2 * self.param + 0.3) / 100)
 #
 #
-# stat = Stationery()
-# pen = Pen("Звезда")
-# pencil = Pensil("Коммунарка")
-# marker = Marker("Китайский рандом")
+# coat = Coat(50)
+# costume = Costume(180)
+# print(coat + costume + coat)
+
+# class Cell:
+#     def __init__(self, nums):
+#         self.nums = nums
 #
-# office_supplies = [stat, pen, pencil, marker]
+#     def order(self, rows):
+#         return '\n'.join(['**' * rows for _ in range(self.nums // rows)]) + '\n' + '$$' * (self.nums % rows)
 #
-# for n in office_supplies:
-#     n.draw()
+#     def __str__(self):
+#         return f"{self.nums}"
+#
+#     def __add__(self, other):
+#         print("Sum of cell = ")
+#         return Cell(self.nums + other.nums)
+#
+#     def __sub__(self, other):
+#         print("Subtraction of cell = ")
+#         return  Cell(self.nums - other.nums) if self.nums - other.nums > 0 \
+#             else "Ячеек в первой клетке меньше чем во второй, вычесть невозможно!"
+#
+#     def __mul__(self, other):
+#         print("Multiply of cell is:")
+#         return Cell(self.nums * other.nums)
+#
+#     def __floordiv__(self, other):
+#         print("Truediv of cell is:")
+#         return Cell(self.nums // other.nums)
+#
+#
+# cell_1 = Cell(20)
+# cell_2 = Cell(30)
+# print(cell_1 + cell_2)
+# print(cell_1 - cell_2)
+# print(cell_1 * cell_2)
+# print(cell_1 // cell_2)
+# print(cell_2.order(7))
+#
